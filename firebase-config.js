@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+// Hapus onAuthStateChanged dari import di sini, karena akan ditangani di script.js
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA9jIBj5bkxo8e_SewIsfNyhEcoUs7Cq6A",
@@ -16,17 +17,22 @@ const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
+// Event listener untuk tombol Login
 document.getElementById("loginBtn").addEventListener("click", () => {
   signInWithPopup(auth, provider);
 });
 
+// Event listener untuk tombol Logout
 document.getElementById("logoutBtn").addEventListener("click", () => {
   signOut(auth);
 });
 
+// HAPUS BLOK onAuthStateChanged DARI SINI
+// Logika onAuthStateChanged akan sepenuhnya ditangani di script.js
+/*
 onAuthStateChanged(auth, (user) => {
   const userInfo = document.getElementById("userInfo");
-  const genBtn = document.getElementById("generateBtn");
+  const genBtn = document.getElementById("generateBtn"); // Ini ID lama yang menyebabkan error
   const logoutBtn = document.getElementById("logoutBtn");
 
   if (user) {
@@ -39,5 +45,6 @@ onAuthStateChanged(auth, (user) => {
     logoutBtn.style.display = "none";
   }
 });
+*/
 
-export { auth };
+export { auth }; // Ekspor objek auth agar bisa digunakan di script.js
