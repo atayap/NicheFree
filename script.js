@@ -159,7 +159,8 @@ window.generateFeature = async function (feature) {
   } else if (feature === 'shortsSchedule') {
     currentInputElem = scheduleInput;
     userInput = scheduleInput.value.trim();
-    promptText = `Buatkan jadwal upload YouTube Shorts untuk 30 hari ke depan dengan konsisten, berdasarkan niche atau topik: ${userInput}. Sertakan ide topik singkat untuk setiap hari. Format jadwal harian.`;
+    // Prompt untuk Jadwal YouTube Shorts diperbarui
+    promptText = `Buatkan jadwal upload YouTube Shorts untuk 30 hari ke depan. Pertimbangkan kesibukan atau kendala pribadi berikut: "${userInput}". Sertakan jam upload optimal berdasarkan waktu ramai penonton YouTube (misalnya, pagi, siang, sore, malam) dan ide topik singkat untuk setiap hari. Format jadwal harian dengan waktu dan ide konten.`;
   } else if (feature === 'contentIdeas') {
     currentInputElem = ideasInput;
     userInput = ideasInput.value.trim();
