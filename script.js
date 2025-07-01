@@ -60,31 +60,55 @@ function showFeatureSection(sectionToShow) {
 }
 
 // Event Listeners untuk tombol fitur
-nicheFinderBtn.addEventListener("click", () => showFeatureSection(nicheFinderSection));
-shortsScheduleBtn.addEventListener("click", () => showFeatureSection(shortsScheduleSection));
-contentIdeasBtn.addEventListener("click", () => showFeatureSection(contentIdeasSection));
+// Pastikan tombol-tombol ini ada di index.html dengan ID yang sesuai
+if (nicheFinderBtn) {
+    nicheFinderBtn.addEventListener("click", () => showFeatureSection(nicheFinderSection));
+}
+if (shortsScheduleBtn) {
+    shortsScheduleBtn.addEventListener("click", () => showFeatureSection(shortsScheduleSection));
+}
+if (contentIdeasBtn) {
+    contentIdeasBtn.addEventListener("click", () => showFeatureSection(contentIdeasSection));
+}
+
 
 // Fungsi untuk mengupdate status tombol Generate (enable/disable)
 function updateGenerateButtonState() {
     const isUserLoggedIn = auth.currentUser;
-    document.getElementById("generateNicheBtn").disabled = !isUserLoggedIn;
-    document.getElementById("generateScheduleBtn").disabled = !isUserLoggedIn;
-    document.getElementById("generateIdeasBtn").disabled = !isUserLoggedIn;
+    // Pastikan elemen tombol ada sebelum mencoba mengakses properti disabled
+    if (document.getElementById("generateNicheBtn")) {
+        document.getElementById("generateNicheBtn").disabled = !isUserLoggedIn;
+    }
+    if (document.getElementById("generateScheduleBtn")) {
+        document.getElementById("generateScheduleBtn").disabled = !isUserLoggedIn;
+    }
+    if (document.getElementById("generateIdeasBtn")) {
+        document.getElementById("generateIdeasBtn").disabled = !isUserLoggedIn;
+    }
 }
 
 // Event Listener untuk Auth State (dari firebase-config.js)
+// Ini adalah bagian kunci yang akan menampilkan menu setelah login
 onAuthStateChanged(auth, (user) => {
   if (user) {
     userInfo.textContent = `Halo, ${user.displayName}`;
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
-    featureMenu.style.display = "block"; // Tampilkan menu fitur setelah login
-    showFeatureSection(nicheFinderSection); // Tampilkan fitur pencari niche secara default
+    
+    // Pastikan featureMenu ada sebelum mencoba mengubah display
+    if (featureMenu) {
+        featureMenu.style.display = "block"; // Tampilkan menu fitur setelah login
+        showFeatureSection(nicheFinderSection); // Tampilkan fitur pencari niche secara default
+    }
   } else {
     userInfo.textContent = "";
     loginBtn.style.display = "inline-block";
     logoutBtn.style.display = "none";
-    featureMenu.style.display = "none"; // Sembunyikan menu fitur jika belum login
+    
+    // Pastikan featureMenu ada sebelum mencoba mengubah display
+    if (featureMenu) {
+        featureMenu.style.display = "none"; // Sembunyikan menu fitur jika belum login
+    }
     showFeatureSection(null); // Sembunyikan semua fitur
     outputContainer.style.display = "none"; // Sembunyikan hasil
   }
