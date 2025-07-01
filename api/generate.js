@@ -1,61 +1,59 @@
 // api/generate.js
 
-// Cara 1: Gunakan fetch global Node.js (Node 18+). Ini adalah yang paling bersih jika Vercel mendukungnya.
-// const fetch = require('node-fetch'); // Hapus baris ini jika Node.js Vercel sudah punya fetch global
-
-// Jika Anda ingin memastikan menggunakan node-fetch, cara terbaik adalah dengan dynamic import
-// atau pastikan package.json Anda disetel ke "type": "module" dan tidak ada require di mana pun.
-
-// Mari kita coba cara yang paling kompatibel dan direkomendasikan Vercel:
-// Menggunakan fetch global Node.js (sejak Node.js 18)
-// Atau pastikan Anda menginstal "node-fetch" dan mengimpornya dengan benar
-
+// Fungsi handler untuk menangani permintaan API.
+// Ini akan menerima input dari frontend dan memanggil API OpenRouter.
 export default async function handler(req, res) {
+  // Memastikan metode permintaan adalah POST.
+  // Ini penting untuk keamanan dan memastikan endpoint hanya digunakan sesuai tujuan.
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
+  // Mengambil userInput dari body permintaan.
+  // userInput ini akan berisi prompt yang sudah disesuaikan dari frontend (script.js).
   const { userInput } = req.body;
+
+  // Memvalidasi apakah userInput tidak kosong.
+  // Jika kosong, kembalikan error 400 Bad Request.
   if (!userInput) {
     return res.status(400).json({ message: 'User input is required' });
   }
 
+  // Mengambil API Key OpenRouter dari environment variables Vercel.
+  // Ini adalah cara yang aman untuk menyimpan kredensial sensitif.
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
+  // Memeriksa apakah API Key telah disetel.
+  // Jika tidak, kembalikan error 500 Internal Server Error.
   if (!OPENROUTER_API_KEY) {
       console.error("OPENROUTER_API_KEY is not set in environment variables.");
       return res.status(500).json({ message: 'Server configuration error: API Key not set.' });
   }
 
   try {
-    // Gunakan fetch. Perlu dicatat, di Node.js 18 ke atas, fetch sudah global.
-    // Jika Vercel menggunakan Node 22 (seperti yang terlihat di screenshot Resources Anda),
-    // seharusnya Anda tidak perlu 'import fetch from "node-fetch";' sama sekali.
-    // Kita bisa coba hapus baris import node-fetch untuk melihat apakah itu solusinya.
-
-    // Untuk memastikan, kita bisa tetap menggunakan import, tapi pastikan tidak ada konflik.
-    // Paling aman adalah pastikan package.json TIDAK memiliki "type": "module"
-    // dan Anda menggunakan `const fetch = require('node-fetch');` jika Anda ingin menggunakannya.
-
-    // Namun, error log Anda menunjukkan masalah dengan `import`.
-    // Coba **hapus baris import node-fetch** dari api/generate.js:
-    // HAPUS: import fetch from 'node-fetch';
-    // Karena Node 22 sudah memiliki fetch bawaan.
-
+    // Melakukan panggilan ke API OpenRouter.
+    // Karena Vercel menggunakan Node.js 18+ (saat ini Node 22),
+    // fungsi `fetch` sudah tersedia secara global, jadi tidak perlu import `node-fetch`.
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
+      method: "POST", // Metode POST untuk mengirim data
       headers: {
+        // Header otentikasi menggunakan API Key.
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        // Menentukan tipe konten sebagai JSON.
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        // Model AI yang akan digunakan (mistralai/mistral-7b-instruct:free).
         model: "mistralai/mistral-7b-instruct:free",
         messages: [
           {
+            // System prompt untuk mengarahkan perilaku AI.
+            // Ini disesuaikan agar AI fokus pada konten kreator YouTube Shorts.
             role: "system",
-            content: "Kamu adalah AI yang membantu membuat teks menarik dan profesional."
+            content: "Kamu adalah AI yang membantu membuat teks menarik dan profesional untuk konten kreator YouTube Shorts."
           },
           {
+            // Pesan dari pengguna, yang berisi prompt spesifik fitur dari frontend.
             role: "user",
             content: userInput
           }
@@ -63,11 +61,16 @@ export default async function handler(req, res) {
       })
     });
 
+    // Mengurai respons dari API menjadi JSON.
     const data = await response.json();
+
+    // Mengirimkan status dan data respons dari OpenRouter kembali ke frontend.
     res.status(response.status).json(data);
 
   } catch (error) {
+    // Menangani kesalahan yang terjadi selama panggilan API.
     console.error("Error calling OpenRouter API:", error);
+    // Mengembalikan error 500 Internal Server Error ke frontend.
     res.status(500).json({ message: "Terjadi kesalahan pada server saat menghubungi AI." });
   }
 }
