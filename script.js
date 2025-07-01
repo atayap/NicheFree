@@ -1,3 +1,4 @@
+// script.js
 import { auth } from "./firebase-config.js";
 
 let count = 0;
@@ -40,35 +41,32 @@ window.generateText = async function () {
   resultText.textContent = "";
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    // Panggil endpoint API Anda di Vercel, bukan langsung OpenRouter
+    const response = await fetch("/api/generate", { // <--- UBAH DI SINI!
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct:free",
-        messages: [
-          {
-            role: "system",
-            content: "Kamu adalah AI yang membantu membuat teks menarik dan profesional."
-          },
-          {
-            role: "user",
-            content: input
-          }
-        ]
+        userInput: input // Kirim input pengguna ke serverless function
       })
     });
 
     const data = await response.json();
-    resultText.textContent = data?.choices?.[0]?.message?.content || "Gagal mendapatkan hasil.";
-    count++;
-    limitInfo.textContent = `Generate hari ini: ${count}/5`;
+
+    // Tangani jika ada error dari serverless function atau OpenRouter
+    if (response.ok) { // Jika respons OK (status 200-299)
+        resultText.textContent = data?.choices?.[0]?.message?.content || "Gagal mendapatkan hasil.";
+        count++;
+        limitInfo.textContent = `Generate hari ini: ${count}/5`;
+    } else {
+        resultText.textContent = data.message || "Gagal mendapatkan hasil dari AI.";
+        console.error("API Error:", data);
+    }
 
   } catch (error) {
-    resultText.textContent = "Terjadi kesalahan saat menghubungi AI.";
-    console.error(error);
+    resultText.textContent = "Terjadi kesalahan saat menghubungi server.";
+    console.error("Network or fetch error:", error);
   } finally {
     loader.style.display = "none";
     outputContainer.style.display = "block";
