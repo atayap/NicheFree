@@ -1,11 +1,12 @@
 // script.js
+// Pastikan onAuthStateChanged diimport dari firebase-auth
 import { auth } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"; // Pastikan baris ini ada!
 
 let count = 0;
 let lastReset = new Date().toDateString();
 
 // Elemen UI
-// Menambahkan console.log untuk setiap elemen yang diambil
 const featureMenu = document.getElementById("featureMenu");
 console.log("featureMenu element:", featureMenu); // Debugging log
 const nicheFinderSection = document.getElementById("nicheFinderSection");
