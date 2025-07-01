@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FreeAI Text Generator</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script type="module" src="firebase-config.js"></script>
+  <script src="script.js" type="module"></script>
+</head>
+<body>
+
+  <!-- Iklan kiri -->
+  <div class="ads-left">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '4e0079a11f6b03e062113a9c294d3e36',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/4e0079a11f6b03e062113a9c294d3e36/invoke.js"></script>
+  </div>
+
+  <!-- Iklan kanan -->
+  <div class="ads-right">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '4e0079a11f6b03e062113a9c294d3e36',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/4e0079a11f6b03e062113a9c294d3e36/invoke.js"></script>
+  </div>
+
+  <!-- Konten utama -->
+  <div class="container">
+    <h1>FreeAI Text Generator</h1>
+
+    <div id="authSection">
+      <button id="loginBtn">Login with Google</button>
+      <button id="logoutBtn" style="display:none;">Logout</button>
+    </div>
+
+    <p id="userInfo"></p>
+
+    <textarea id="userInput" placeholder="Masukkan perintah atau deskripsi..."></textarea>
+    <button onclick="generateText()" id="generateBtn" disabled>Generate</button>
+    <p id="limitInfo"></p>
+
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <div id="outputContainer">
+      <h2>Hasil:</h2>
+      <div id="resultText"></div>
+      <button onclick="copyText()">Copy</button>
+    </div>
+
+    <div class="toggle-theme">
+      <label>🌙 Dark Mode</label>
+      <input type="checkbox" id="themeToggle">
+    </div>
+  </div>
+
+</body>
+</html>
