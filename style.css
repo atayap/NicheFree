@@ -109,3 +109,29 @@ button {
   }
 }
 
+/* Styling untuk iklan Adsterra di bawah prompt */
+.adsterra-below-prompt {
+    /* Lebar maksimum agar tidak terlalu lebar di layar besar */
+    /* Untuk iklan 300x250, max-width 300px akan menjaga ukuran aslinya di desktop */
+    max-width: 300px; /* Diubah menjadi 300px sesuai ukuran iklan Anda */
+    margin-left: auto; /* Memastikan div pembungkus terpusat */
+    margin-right: auto;/* Memastikan div pembungkus terpusat */
+    box-sizing: border-box; /* Memastikan padding dan border tidak menambah lebar total */
+}
+
+/* Ini penting untuk membuat iframe iklan responsif */
+.adsterra-below-prompt iframe {
+    max-width: 100% !important; /* Pastikan iframe tidak melebihi lebar kontainer pembungkusnya */
+    height: auto !important;     /* Biarkan tinggi menyesuaikan secara proporsional */
+    display: block;              /* Agar iframe berlaku seperti blok dan margin auto berfungsi */
+    margin: 0 auto;              /* Memusatkan iframe di dalam div pembungkusnya */
+}
+
+/* Media query untuk perangkat mobile */
+@media (max-width: 600px) {
+    .adsterra-below-prompt {
+        /* Di mobile, biarkan iklan mengambil lebar penuh jika diperlukan */
+        max-width: 100%;
+        padding: 0 10px; /* Tambahkan sedikit padding agar iklan tidak menempel di tepi layar */
+    }
+}
