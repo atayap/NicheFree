@@ -7,7 +7,7 @@
 }
 
 [data-theme="dark"] {
-  --bg: red;
+  --bg: #121212;
   --text: #fff;
   --box: #1e1e1e;
   --result-bg: #2c2c2c;
