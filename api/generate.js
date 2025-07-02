@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "google/gemma-3n-e4b-it:free",
         prompt: userInput,
-        max_tokens: 300
+        max_tokens: 1500
       })
     });
 
