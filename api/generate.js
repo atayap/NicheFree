@@ -17,16 +17,26 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/completions", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "google/gemma-3n-e4b-it:free",
-        prompt: userInput,
-        max_tokens: 1500
+        model: "meta-llama/llama-3.1-8b-instruct:free",
+        messages: [
+          {
+            role: "system",
+            content: "Kamu adalah AI profesional yang membantu membuat konten dan jadwal YouTube Shorts secara kreatif dan detail."
+          },
+          {
+            role: "user",
+            content: userInput
+          }
+        ],
+        max_tokens: 1500,
+        temperature: 0.8
       })
     });
 

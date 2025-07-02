@@ -1,4 +1,3 @@
-// script.js
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -129,10 +128,10 @@ window.generateFeature = async function (feature) {
     });
 
     const data = await response.json();
-    console.log("Response dari API:", data); // Tambahan debugging
+    console.log("Response dari API:", data); // Debugging
 
     if (response.ok) {
-      const cleanText = data?.choices?.[0]?.text?.replace(/\*\*/g, '').trim();
+      const cleanText = data?.choices?.[0]?.message?.content?.replace(/\*\*/g, '').trim();
       resultText.textContent = cleanText || "Gagal mendapatkan hasil.";
       count++;
       document.getElementById('limitInfo').textContent = `Generate hari ini: ${count}/5`;
