@@ -132,7 +132,8 @@ window.generateFeature = async function (feature) {
     console.log("Response dari API:", data); // Tambahan debugging
 
     if (response.ok) {
-      resultText.textContent = data?.choices?.[0]?.text?.trim() || "Gagal mendapatkan hasil.";
+      const cleanText = data?.choices?.[0]?.text?.replace(/\*\*/g, '').trim();
+      resultText.textContent = cleanText || "Gagal mendapatkan hasil.";
       count++;
       document.getElementById('limitInfo').textContent = `Generate hari ini: ${count}/5`;
     } else {
