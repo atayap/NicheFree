@@ -5,6 +5,23 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/f
 let count = 0;
 let lastReset = new Date().toDateString();
 
+// Fungsi untuk mengatur tema
+function setupThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  
+  // Cek preferensi tema dari localStorage
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeToggle.checked = savedTheme === 'dark';
+  
+  // Event listener untuk toggle
+  themeToggle.addEventListener('change', (e) => {
+    const theme = e.target.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  });
+}
+
 // Fungsi untuk menampilkan section fitur
 function showFeature(featureName) {
   // Sembunyikan semua section
@@ -37,8 +54,7 @@ function backToMenu() {
 }
 
 // Event listener untuk card fitur
-document.addEventListener('DOMContentLoaded', function() {
-  // Tambahkan event listener untuk setiap card fitur
+function setupFeatureCards() {
   document.querySelectorAll('.feature-card').forEach(card => {
     card.addEventListener('click', function() {
       const feature = this.getAttribute('data-feature');
@@ -50,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.back-btn').forEach(btn => {
     btn.addEventListener('click', backToMenu);
   });
-});
+}
 
 // Fungsi untuk mereset limit harian
 function resetLimitIfNeeded() {
@@ -157,7 +173,9 @@ window.copyText = function () {
   alert("Teks disalin!");
 };
 
-// Initial state
+// Initial setup
 document.addEventListener("DOMContentLoaded", () => {
+  setupThemeToggle();
+  setupFeatureCards();
   resetLimitIfNeeded();
 });
