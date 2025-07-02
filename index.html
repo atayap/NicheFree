@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FreeAI Text Generator</title>
+  <title>FreeAI Content Creator Tools</title>
   <link rel="stylesheet" href="style.css"/>
   <script type="module" src="firebase-config.js"></script>
   <script src="script.js" type="module"></script>
-  <!-- Tempat untuk Favicon Anda -->
-  <!-- Pastikan Anda menempatkan file gambar favicon Anda (misalnya, logo.png atau favicon.ico) -->
-  <!-- di folder root proyek Anda, atau sesuaikan path-nya di bawah. -->
   <link rel="icon" type="image/png" href="/logo.png"> 
   <link rel="shortcut icon" type="image/png" href="/logo.png">
-  <!-- Anda juga bisa menggunakan format .ico untuk kompatibilitas yang lebih luas -->
-  <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico"> -->
+  <!-- Tambahkan font Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="ads-left">
+  <!-- Iklan sidebar kiri -->
+  <div class="ads-left">
     <script type="text/javascript">
       atOptions = {
         'key' : '4e0079a11f6b03e062113a9c294d3e36',
@@ -30,7 +28,8 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/4e0079a11f6b03e062113a9c294d3e36/invoke.js"></script>
   </div>
 
-    <div class="ads-right">
+  <!-- Iklan sidebar kanan -->
+  <div class="ads-right">
     <script type="text/javascript">
       atOptions = {
         'key' : '4e0079a11f6b03e062113a9c294d3e36',
@@ -43,8 +42,14 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/4e0079a11f6b03e062113a9c294d3e36/invoke.js"></script>
   </div>
 
-    <div class="container">
-    <h1>FreeAI Content Creator Tools</h1>
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      <h1>FreeAI Content Creator Tools</h1>
+      <p>Generate viral content ideas, YouTube schedules, and niche research with AI</p>
+    </div>
+
+    <!-- Auth Section -->
     <div id="authSection">
       <button id="loginBtn">Login with Google</button>
       <button id="logoutBtn" style="display:none;">Logout</button>
@@ -52,58 +57,80 @@
 
     <p id="userInfo"></p>
 
+    <!-- Feature Grid -->
     <div id="featureMenu" style="display: none;">
-        <h2>Pilih Fitur:</h2>
-        <div class="feature-buttons">
-            <button id="nicheFinderBtn" class="feature-btn">Cari Niche Viral</button>
-            <button id="shortsScheduleBtn" class="feature-btn">Jadwal YouTube Shorts</button>
-            <button id="contentIdeasBtn" class="feature-btn">Ide Konten 30 Hari</button>
+      <div class="feature-grid">
+        <div class="feature-card" onclick="showFeature('nicheFinder')">
+          <h3>Cari Niche Viral</h3>
+          <p>Temukan niche yang sedang trending untuk konten Anda</p>
         </div>
+        
+        <div class="feature-card" onclick="showFeature('shortsSchedule')">
+          <h3>Jadwal YouTube Shorts</h3>
+          <p>Generate optimal posting schedule</p>
+        </div>
+        
+        <div class="feature-card" onclick="showFeature('contentIdeas')">
+          <h3>Ide Konten 30 Hari</h3>
+          <p>Dapatkan ide konten lengkap untuk 1 bulan</p>
+        </div>
+      </div>
     </div>
 
-    <div id="nicheFinderSection" class="feature-section" style="display: none;">
+    <!-- Feature Sections (akan ditampilkan saat dipilih) -->
+    <div id="featureSections">
+      <!-- Niche Finder Section -->
+      <div id="nicheFinderSection" class="feature-section" style="display: none;">
         <h2>Cari Niche Viral</h2>
         <p>Masukkan topik umum atau kata kunci untuk menemukan niche yang sedang viral.</p>
         <textarea id="nicheInput" placeholder="Contoh: gaming, memasak, fashion, teknologi..."></textarea>
         <button onclick="generateFeature('nicheFinder')" id="generateNicheBtn">Cari Niche</button>
-    </div>
+      </div>
 
-    <div id="shortsScheduleSection" class="feature-section" style="display: none;">
+      <!-- Shorts Schedule Section -->
+      <div id="shortsScheduleSection" class="feature-section" style="display: none;">
         <h2>Jadwal YouTube Shorts</h2>
-        <p>Hasilkan jadwal upload YouTube Shorts yang konsisten, disesuaikan dengan kesibukan Anda. AI akan menyarankan jam upload optimal berdasarkan waktu ramai penonton YouTube.</p> <!-- Perubahan di sini -->
-        <textarea id="scheduleInput" placeholder="Masukkan niche atau topik Anda (contoh: komedi hewan, tutorial masak cepat) dan detail kesibukan Anda (contoh: pagi kerja, sore les)..."></textarea> <!-- Placeholder juga diperbarui -->
+        <p>Hasilkan jadwal upload YouTube Shorts yang konsisten, disesuaikan dengan kesibukan Anda.</p>
+        <textarea id="scheduleInput" placeholder="Masukkan niche atau topik Anda dan detail kesibukan Anda..."></textarea>
         <button onclick="generateFeature('shortsSchedule')" id="generateScheduleBtn">Buat Jadwal</button>
-    </div>
+      </div>
 
-    <div id="contentIdeasSection" class="feature-section" style="display: none;">
+      <!-- Content Ideas Section -->
+      <div id="contentIdeasSection" class="feature-section" style="display: none;">
         <h2>Ide Konten 30 Hari</h2>
         <p>Dapatkan ide konten lengkap dengan judul, deskripsi, hashtag, dan tag untuk 30 hari.</p>
-        <textarea id="ideasInput" placeholder="Masukkan niche atau topik Anda (contoh: review gadget, tips coding, vlog perjalanan)..."></textarea>
+        <textarea id="ideasInput" placeholder="Masukkan niche atau topik Anda..."></textarea>
         <button onclick="generateFeature('contentIdeas')" id="generateIdeasBtn">Hasilkan Ide</button>
+      </div>
     </div>
 
     <div id="limitInfo" style="text-align: center; margin-top: 10px; font-size: 0.9em;"></div>
 
-    <div class="adsterra-below-prompt" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'b50867b0d14a52abb27934308bb91dcd',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/b50867b0d14a52abb27934308bb91dcd/invoke.js"></script>
+    <!-- Iklan bawah -->
+    <div class="adsterra-below-prompt">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'b50867b0d14a52abb27934308bb91dcd',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/b50867b0d14a52abb27934308bb91dcd/invoke.js"></script>
     </div>
-        <div id="loader" class="loader" style="display: none;"></div>
 
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <!-- Output Container -->
     <div id="outputContainer">
       <h2>Hasil:</h2>
       <div id="resultText"></div>
       <button onclick="copyText()">Copy</button>
     </div>
 
+    <!-- Toggle Theme -->
     <div class="toggle-theme">
       <label>🌙 Dark Mode</label>
       <input type="checkbox" id="themeToggle">
