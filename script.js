@@ -89,13 +89,44 @@ window.generateFeature = async function (feature) {
 
   if (feature === 'nicheFinder') {
     userInput = document.getElementById('nicheInput').value.trim();
-    promptText = `Temukan niche viral berdasarkan topik ini: ${userInput}. Berikan beberapa ide niche yang spesifik dan sedang tren.`;
+    promptText = `
+Kamu adalah AI profesional yang membantu konten kreator YouTube Shorts.
+Berdasarkan topik berikut ini, berikan beberapa niche viral dan spesifik yang sedang tren di tahun 2025.
+
+Pastikan niche tersebut cocok untuk video pendek (15–60 detik) dan memiliki potensi views tinggi.
+
+Topik dari user:
+${userInput}
+`.trim();
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
-    promptText = `Buatkan jadwal upload YouTube Shorts untuk 30 hari ke depan berdasarkan topik: ${userInput}. Berikan tanggal dan ide singkat setiap harinya.`;
+    promptText = `
+TANGGAL SAAT INI ADALAH 2 JULI 2025.
+
+Kamu adalah AI profesional pembuat konten.
+Tolong bantu saya membuat **jadwal upload YouTube Shorts** yang realistis.
+
+Saya hanya bisa upload **2 kali per minggu**, dan saya **bekerja dari jam 6 pagi sampai jam 8 malam, Senin sampai Jumat**. Jadi saya hanya punya waktu luang di malam hari atau di hari Sabtu dan Minggu.
+
+Buatkan jadwal selama 4 minggu ke depan, sebutkan tanggal dan waktu upload-nya, lalu berikan ide video singkat per hari.
+
+Topik tambahan dari user:
+${userInput}
+`.trim();
   } else if (feature === 'contentIdeas') {
     userInput = document.getElementById('ideasInput').value.trim();
-    promptText = `Berikan ide konten YouTube Shorts selama 30 hari untuk niche atau topik: ${userInput}. Sertakan judul pendek dan konsepnya.`;
+    promptText = `
+Kamu adalah AI kreatif yang membantu membuat konten YouTube Shorts.
+
+Berikan 30 ide konten pendek untuk niche berikut: "${userInput}".
+
+Setiap ide harus berisi:
+1. Judul pendek
+2. Konsep isi video (1–2 kalimat)
+3. Gaya video (narasi, motivasi, tips, dll)
+
+Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.
+`.trim();
   }
 
   if (count >= 5) {
