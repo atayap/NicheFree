@@ -9,7 +9,6 @@
   <script src="script.js" type="module"></script>
   <link rel="icon" type="image/png" href="/logo.png"> 
   <link rel="shortcut icon" type="image/png" href="/logo.png">
-  <!-- Tambahkan font Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -60,28 +59,31 @@
     <!-- Feature Grid -->
     <div id="featureMenu" style="display: none;">
       <div class="feature-grid">
-        <div class="feature-card" onclick="showFeature('nicheFinder')">
+        <div class="feature-card" data-feature="nicheFinder">
           <h3>Cari Niche Viral</h3>
           <p>Temukan niche yang sedang trending untuk konten Anda</p>
         </div>
         
-        <div class="feature-card" onclick="showFeature('shortsSchedule')">
+        <div class="feature-card" data-feature="shortsSchedule">
           <h3>Jadwal YouTube Shorts</h3>
           <p>Generate optimal posting schedule</p>
         </div>
         
-        <div class="feature-card" onclick="showFeature('contentIdeas')">
+        <div class="feature-card" data-feature="contentIdeas">
           <h3>Ide Konten 30 Hari</h3>
           <p>Dapatkan ide konten lengkap untuk 1 bulan</p>
         </div>
       </div>
     </div>
 
-    <!-- Feature Sections (akan ditampilkan saat dipilih) -->
+    <!-- Feature Sections -->
     <div id="featureSections">
       <!-- Niche Finder Section -->
       <div id="nicheFinderSection" class="feature-section" style="display: none;">
-        <h2>Cari Niche Viral</h2>
+        <div class="section-header">
+          <button class="back-btn">← Kembali ke Menu</button>
+          <h2>Cari Niche Viral</h2>
+        </div>
         <p>Masukkan topik umum atau kata kunci untuk menemukan niche yang sedang viral.</p>
         <textarea id="nicheInput" placeholder="Contoh: gaming, memasak, fashion, teknologi..."></textarea>
         <button onclick="generateFeature('nicheFinder')" id="generateNicheBtn">Cari Niche</button>
@@ -89,7 +91,10 @@
 
       <!-- Shorts Schedule Section -->
       <div id="shortsScheduleSection" class="feature-section" style="display: none;">
-        <h2>Jadwal YouTube Shorts</h2>
+        <div class="section-header">
+          <button class="back-btn">← Kembali ke Menu</button>
+          <h2>Jadwal YouTube Shorts</h2>
+        </div>
         <p>Hasilkan jadwal upload YouTube Shorts yang konsisten, disesuaikan dengan kesibukan Anda.</p>
         <textarea id="scheduleInput" placeholder="Masukkan niche atau topik Anda dan detail kesibukan Anda..."></textarea>
         <button onclick="generateFeature('shortsSchedule')" id="generateScheduleBtn">Buat Jadwal</button>
@@ -97,7 +102,10 @@
 
       <!-- Content Ideas Section -->
       <div id="contentIdeasSection" class="feature-section" style="display: none;">
-        <h2>Ide Konten 30 Hari</h2>
+        <div class="section-header">
+          <button class="back-btn">← Kembali ke Menu</button>
+          <h2>Ide Konten 30 Hari</h2>
+        </div>
         <p>Dapatkan ide konten lengkap dengan judul, deskripsi, hashtag, dan tag untuk 30 hari.</p>
         <textarea id="ideasInput" placeholder="Masukkan niche atau topik Anda..."></textarea>
         <button onclick="generateFeature('contentIdeas')" id="generateIdeasBtn">Hasilkan Ide</button>
