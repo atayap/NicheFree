@@ -5,16 +5,12 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/f
 let count = 0;
 let lastReset = new Date().toDateString();
 
-// Fungsi untuk mengatur tema
 function setupThemeToggle() {
   const themeToggle = document.getElementById('themeToggle');
-  
-  // Cek preferensi tema dari localStorage
   const savedTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
   themeToggle.checked = savedTheme === 'dark';
-  
-  // Event listener untuk toggle
+
   themeToggle.addEventListener('change', (e) => {
     const theme = e.target.checked ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', theme);
@@ -22,53 +18,38 @@ function setupThemeToggle() {
   });
 }
 
-// Fungsi untuk menampilkan section fitur
 function showFeature(featureName) {
-  // Sembunyikan semua section
   document.querySelectorAll('.feature-section').forEach(section => {
     section.style.display = 'none';
   });
-  
-  // Tampilkan section yang dipilih
+
   document.getElementById(`${featureName}Section`).style.display = 'block';
-  
-  // Sembunyikan feature grid
   document.getElementById('featureMenu').style.display = 'none';
-  
-  // Sembunyikan output container jika terbuka
   document.getElementById('outputContainer').style.display = 'none';
 }
 
-// Fungsi untuk kembali ke menu utama
 function backToMenu() {
-  // Sembunyikan semua section
   document.querySelectorAll('.feature-section').forEach(section => {
     section.style.display = 'none';
   });
-  
-  // Tampilkan feature grid
+
   document.getElementById('featureMenu').style.display = 'block';
-  
-  // Sembunyikan output container
   document.getElementById('outputContainer').style.display = 'none';
 }
 
-// Event listener untuk card fitur
 function setupFeatureCards() {
   document.querySelectorAll('.feature-card').forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
       const feature = this.getAttribute('data-feature');
       showFeature(feature);
     });
   });
-  
-  // Tambahkan event listener untuk tombol kembali
+
   document.querySelectorAll('.back-btn').forEach(btn => {
     btn.addEventListener('click', backToMenu);
   });
 }
 
-// Fungsi untuk mereset limit harian
 function resetLimitIfNeeded() {
   const today = new Date().toDateString();
   if (lastReset !== today) {
@@ -77,7 +58,6 @@ function resetLimitIfNeeded() {
   }
 }
 
-// Fungsi untuk mengupdate status tombol Generate
 function updateGenerateButtonState() {
   const isUserLoggedIn = auth.currentUser;
   ['nicheFinder', 'shortsSchedule', 'contentIdeas'].forEach(feature => {
@@ -86,7 +66,6 @@ function updateGenerateButtonState() {
   });
 }
 
-// Event Listener untuk Auth State
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById('userInfo').textContent = `Halo, ${user.displayName}`;
@@ -103,7 +82,6 @@ onAuthStateChanged(auth, (user) => {
   updateGenerateButtonState();
 });
 
-// Fungsi utama generateText
 window.generateFeature = async function (feature) {
   resetLimitIfNeeded();
 
@@ -112,13 +90,13 @@ window.generateFeature = async function (feature) {
 
   if (feature === 'nicheFinder') {
     userInput = document.getElementById('nicheInput').value.trim();
-    promptText = `Temukan niche viral berdasarkan topik ini: ${userInput}. Berikan beberapa ide niche yang spesifik...`;
+    promptText = `Temukan niche viral berdasarkan topik ini: ${userInput}. Berikan beberapa ide niche yang spesifik dan sedang tren.`;
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
-    promptText = `Buatkan jadwal upload YouTube Shorts untuk 30 hari ke depan...`;
+    promptText = `Buatkan jadwal upload YouTube Shorts untuk 30 hari ke depan berdasarkan topik: ${userInput}. Berikan tanggal dan ide singkat setiap harinya.`;
   } else if (feature === 'contentIdeas') {
     userInput = document.getElementById('ideasInput').value.trim();
-    promptText = `Berikan ide konten YouTube Shorts selama 30 hari untuk niche atau topik: ${userInput}...`;
+    promptText = `Berikan ide konten YouTube Shorts selama 30 hari untuk niche atau topik: ${userInput}. Sertakan judul pendek dan konsepnya.`;
   }
 
   if (count >= 5) {
@@ -151,9 +129,10 @@ window.generateFeature = async function (feature) {
     });
 
     const data = await response.json();
+    console.log("Response dari API:", data); // Tambahan debugging
 
     if (response.ok) {
-      resultText.textContent = data?.choices?.[0]?.message?.content || "Gagal mendapatkan hasil.";
+      resultText.textContent = data?.choices?.[0]?.text?.trim() || "Gagal mendapatkan hasil.";
       count++;
       document.getElementById('limitInfo').textContent = `Generate hari ini: ${count}/5`;
     } else {
@@ -161,6 +140,7 @@ window.generateFeature = async function (feature) {
     }
   } catch (error) {
     resultText.textContent = "Terjadi kesalahan saat menghubungi server.";
+    console.error(error);
   } finally {
     loader.style.display = 'none';
     outputContainer.style.display = 'block';
@@ -173,7 +153,6 @@ window.copyText = function () {
   alert("Teks disalin!");
 };
 
-// Initial setup
 document.addEventListener("DOMContentLoaded", () => {
   setupThemeToggle();
   setupFeatureCards();
