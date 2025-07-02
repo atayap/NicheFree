@@ -84,8 +84,17 @@
           <button class="back-btn">← Kembali ke Menu</button>
           <h2>Cari Niche Viral</h2>
         </div>
-        <p>Masukkan topik umum atau kata kunci untuk menemukan niche yang sedang viral.</p>
-        <textarea id="nicheInput" placeholder="Contoh: gaming, memasak, fashion, teknologi..."></textarea>
+        <p>Pilih niche yang sedang tren untuk dijelajahi lebih lanjut.</p>
+        <select id="nicheInput">
+          <option value="Gaming">Gaming</option>
+          <option value="Makanan & Kuliner">Makanan & Kuliner</option>
+          <option value="Masak-Masak">Masak-Masak</option>
+          <option value="Self-Improvement">Self-Improvement</option>
+          <option value="Edukasi Singkat">Edukasi Singkat</option>
+          <option value="Life Hacks">Life Hacks</option>
+          <option value="Fitness & Diet">Fitness & Diet</option>
+          <option value="Review Produk">Review Produk</option>
+        </select>
         <button onclick="generateFeature('nicheFinder')" id="generateNicheBtn">Cari Niche</button>
       </div>
 
@@ -95,8 +104,13 @@
           <button class="back-btn">← Kembali ke Menu</button>
           <h2>Jadwal YouTube Shorts</h2>
         </div>
-        <p>Hasilkan jadwal upload YouTube Shorts yang konsisten, disesuaikan dengan kesibukan Anda.</p>
-        <textarea id="scheduleInput" placeholder="Masukkan niche atau topik Anda dan detail kesibukan Anda..."></textarea>
+        <p>Pilih jenis niche dan frekuensi upload yang kamu inginkan.</p>
+        <select id="scheduleInput">
+          <option value="Gaming 2x per minggu">Gaming - 2x per minggu</option>
+          <option value="Self-Improvement 3x per minggu">Self-Improvement - 3x per minggu</option>
+          <option value="Masak-Masak tiap akhir pekan">Masak-Masak - tiap akhir pekan</option>
+          <option value="Edukasi santai 1x per minggu">Edukasi santai - 1x per minggu</option>
+        </select>
         <button onclick="generateFeature('shortsSchedule')" id="generateScheduleBtn">Buat Jadwal</button>
       </div>
 
@@ -106,8 +120,14 @@
           <button class="back-btn">← Kembali ke Menu</button>
           <h2>Ide Konten 30 Hari</h2>
         </div>
-        <p>Dapatkan ide konten lengkap dengan judul, deskripsi, hashtag, dan tag untuk 30 hari.</p>
-        <textarea id="ideasInput" placeholder="Masukkan niche atau topik Anda..."></textarea>
+        <p>Pilih jenis konten yang ingin kamu dapatkan inspirasinya.</p>
+        <select id="ideasInput">
+          <option value="Gaming">Gaming</option>
+          <option value="Self-Improvement">Self-Improvement</option>
+          <option value="Tips Produktivitas">Tips Produktivitas</option>
+          <option value="Cerita Misteri Pendek">Cerita Misteri Pendek</option>
+          <option value="Hacks & Trik">Hacks & Trik</option>
+        </select>
         <button onclick="generateFeature('contentIdeas')" id="generateIdeasBtn">Hasilkan Ide</button>
       </div>
     </div>

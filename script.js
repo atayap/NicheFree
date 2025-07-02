@@ -1,3 +1,5 @@
+// script.js (diperbarui untuk dropdown, tidak perlu ubah karena sudah pakai .value.trim())
+
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -96,8 +98,8 @@ Berdasarkan topik berikut ini, berikan beberapa niche viral dan spesifik yang se
 Pastikan niche tersebut cocok untuk video pendek (15–60 detik) dan memiliki potensi views tinggi.
 
 Topik dari user:
-${userInput}
-`.trim();
+${userInput}`.trim();
+
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
     promptText = `
@@ -111,8 +113,8 @@ Saya hanya bisa upload **2 kali per minggu**, dan saya **bekerja dari jam 6 pagi
 Buatkan jadwal selama 4 minggu ke depan, sebutkan tanggal dan waktu upload-nya, lalu berikan ide video singkat per hari.
 
 Topik tambahan dari user:
-${userInput}
-`.trim();
+${userInput}`.trim();
+
   } else if (feature === 'contentIdeas') {
     userInput = document.getElementById('ideasInput').value.trim();
     promptText = `
@@ -125,8 +127,7 @@ Setiap ide harus berisi:
 2. Konsep isi video (1–2 kalimat)
 3. Gaya video (narasi, motivasi, tips, dll)
 
-Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.
-`.trim();
+Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim();
   }
 
   if (count >= 5) {
@@ -135,7 +136,7 @@ Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.
   }
 
   if (!userInput) {
-    alert("Masukkan teks untuk fitur ini terlebih dahulu.");
+    alert("Masukkan pilihan terlebih dahulu.");
     return;
   }
 
@@ -153,13 +154,11 @@ Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        userInput: promptText
-      })
+      body: JSON.stringify({ userInput: promptText })
     });
 
     const data = await response.json();
-    console.log("Response dari API:", data); // Debugging
+    console.log("Response dari API:", data);
 
     if (response.ok) {
       const cleanText = data?.choices?.[0]?.message?.content?.replace(/\*\*/g, '').trim();
