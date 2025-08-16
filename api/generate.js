@@ -22,7 +22,7 @@ export default async (req, res) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3.1-8b-instruct:free",
+        model: "qwen/qwq-32b:free",
         messages: [
           { role: "system", content: "Kamu adalah AI profesional yang membantu membuat konten dan jadwal YouTube Shorts secara kreatif dan detail." },
           { role: "user", content: userInput }
