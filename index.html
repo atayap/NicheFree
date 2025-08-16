@@ -85,7 +85,7 @@
           <h2>Cari Niche Viral</h2>
         </div>
         <p>Pilih niche yang sedang tren untuk dijelajahi lebih lanjut.</p>
-        <select id="nicheInput">
+        <select id="nicheInput" onchange="toggleCustomPrompt()">
           <option value="Gaming">Gaming</option>
           <option value="Makanan & Kuliner">Makanan & Kuliner</option>
           <option value="Masak-Masak">Masak-Masak</option>
@@ -94,7 +94,9 @@
           <option value="Life Hacks">Life Hacks</option>
           <option value="Fitness & Diet">Fitness & Diet</option>
           <option value="Review Produk">Review Produk</option>
+          <option value="custom2">Isi Prompt Sendiri</option>
         </select>
+        <textarea id="customnicheInput" placeholder="Tulis prompt kamu di sini..." style="display:none; margin-top:10px;"></textarea>
         <button onclick="generateFeature('nicheFinder')" id="generateNicheBtn">Cari Niche</button>
       </div>
 
@@ -113,16 +115,19 @@
       <div id="contentIdeasSection" class="feature-section" style="display: none;">
         <div class="section-header">
           <button class="back-btn">← Kembali ke Menu</button>
-          <h2>Ide Konten 30 Hari</h2>
+          <h2>Ide Konten 30 Hari</h2> 
         </div>
         <p>Pilih jenis konten yang ingin kamu dapatkan inspirasinya.</p>
-        <select id="ideasInput">
+        <select id="ideasInput" onchange="toggleCustomPrompt()">
           <option value="Gaming">Gaming</option>
           <option value="Self-Improvement">Self-Improvement</option>
           <option value="Tips Produktivitas">Tips Produktivitas</option>
           <option value="Cerita Misteri Pendek">Cerita Misteri Pendek</option>
           <option value="Hacks & Trik">Hacks & Trik</option>
+          <option value="custom">Isi Prompt Sendiri</option>
         </select>
+        <!-- Textarea muncul hanya jika pilih 'Isi Prompt Sendiri' -->
+        <textarea id="customIdeasInput" placeholder="Tulis prompt kamu di sini..." style="display:none; margin-top:10px;"></textarea>
         <button onclick="generateFeature('contentIdeas')" id="generateIdeasBtn">Hasilkan Ide</button>
       </div>
     </div>
@@ -131,6 +136,16 @@
 
     <!-- Iklan bawah -->
     <div class="adsterra-below-prompt">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'b50867b0d14a52abb27934308bb91dcd',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/b50867b0d14a52abb27934308bb91dcd/invoke.js"></script>
       <script type="text/javascript">
         atOptions = {
           'key' : 'b50867b0d14a52abb27934308bb91dcd',

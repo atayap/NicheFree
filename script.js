@@ -1,4 +1,4 @@
-// script.js (diperbarui untuk dropdown, tidak perlu ubah karena sudah pakai .value.trim())
+// script.js
 
 import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -91,6 +91,12 @@ window.generateFeature = async function (feature) {
 
   if (feature === 'nicheFinder') {
     userInput = document.getElementById('nicheInput').value.trim();
+
+    if (ideasSelect === "custom2") {
+      userInput = document.getElementById('customnicheInput').value.trim();
+    } else {
+      userInput = ideasSelect2;
+    }
     promptText = `
 Kamu adalah AI profesional yang membantu konten kreator YouTube Shorts.
 Berdasarkan topik berikut ini, berikan beberapa niche viral dan spesifik yang sedang tren di tahun 2025.
@@ -106,7 +112,14 @@ ${userInput}`.trim();
 ${userInput}`.trim();
 
   } else if (feature === 'contentIdeas') {
-    userInput = document.getElementById('ideasInput').value.trim();
+    let ideasSelect = document.getElementById('ideasInput').value.trim();
+
+    if (ideasSelect === "custom") {
+      userInput = document.getElementById('customIdeasInput').value.trim();
+    } else {
+      userInput = ideasSelect;
+    }
+
     promptText = `
 Kamu adalah AI kreatif yang membantu membuat konten YouTube Shorts.
 
@@ -164,6 +177,30 @@ Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim()
   } finally {
     loader.style.display = 'none';
     outputContainer.style.display = 'block';
+  }
+};
+
+// fungsi global untuk toggle textarea custom
+window.toggleCustomPrompt = function() {
+  const ideasSelect = document.getElementById("ideasInput");
+  const customInput = document.getElementById("customIdeasInput");
+
+  if (ideasSelect.value === "custom") {
+    customInput.style.display = "block";
+  } else {
+    customInput.style.display = "none";
+  }
+};
+
+// fungsi global untuk toggle textarea custom2
+window.toggleCustomPrompt = function() {
+  const ideasSelect2 = document.getElementById("nicheInput");
+  const customInput2 = document.getElementById("customnicheInput");
+
+  if (ideasSelect2.value === "custom2") {
+    customInput2.style.display = "block";
+  } else {
+    customInput2.style.display = "none";
   }
 };
 
