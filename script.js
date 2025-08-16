@@ -102,18 +102,6 @@ ${userInput}`.trim();
 
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
-    promptText = `
-TANGGAL SAAT INI ADALAH 2 JULI 2025.
-
-Kamu adalah AI profesional pembuat konten.
-Tolong bantu saya membuat **jadwal upload YouTube Shorts** yang realistis.
-
-Saya hanya bisa upload **2 kali per minggu**, dan saya **bekerja dari jam 6 pagi sampai jam 8 malam, Senin sampai Jumat**. Jadi saya hanya punya waktu luang di malam hari atau di hari Sabtu dan Minggu.
-
-Buatkan jadwal selama 4 minggu ke depan, sebutkan tanggal dan waktu upload-nya, lalu berikan ide video singkat per hari.
-
-Topik tambahan dari user:
-${userInput}`.trim();
 
   } else if (feature === 'contentIdeas') {
     userInput = document.getElementById('ideasInput').value.trim();
