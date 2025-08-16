@@ -30,29 +30,29 @@
   --disabled: #475569;
 }
 
-/* Input Box Styling */
-input[type="text"], 
-input[type="email"], 
-input[type="password"] {
+/* Custom textarea khusus scheduleInput */
+#scheduleInput {
   width: 100%;
-  padding: 12px 15px;
+  padding: 12px 3px;   /* sesuai permintaan */
   border-radius: 8px;
   border: 1px solid var(--border);
   background-color: var(--bg);
   color: var(--text);
   font-size: 1rem;
+  resize: vertical; /* biar bisa tarik tinggi kalau mau */
   margin-bottom: 15px;
   transition: all 0.2s ease;
   box-shadow: var(--shadow);
+  line-height: 1.5;
 }
 
-input[type="text"]:focus {
+#scheduleInput:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
 }
 
-input[type="text"]::placeholder {
+#scheduleInput::placeholder {
   color: var(--secondary);
   font-style: italic;
 }
