@@ -85,7 +85,8 @@
           <h2>Cari Niche Viral</h2>
         </div>
         <p>Pilih niche yang sedang tren untuk dijelajahi lebih lanjut.</p>
-        <select id="nicheInput" onchange="toggleCustomPrompt()">
+
+        <select id="nicheInput" onchange="toggleCustomNiche()">
           <option value="Gaming">Gaming</option>
           <option value="Makanan & Kuliner">Makanan & Kuliner</option>
           <option value="Masak-Masak">Masak-Masak</option>
@@ -96,9 +97,13 @@
           <option value="Review Produk">Review Produk</option>
           <option value="custom">Isi Prompt Sendiri</option>
         </select>
+
+        <!-- Textarea muncul hanya jika pilih 'Isi Prompt Sendiri' -->
         <textarea id="customNicheInput" placeholder="Tulis prompt kamu di sini..." style="display:none; margin-top:10px;"></textarea>
+
         <button onclick="generateFeature('nicheFinder')" id="generateNicheBtn">Cari Niche</button>
       </div>
+
 
       <!-- Shorts Schedule Section -->
       <div id="shortsScheduleSection" class="feature-section" style="display: none;">
@@ -115,9 +120,10 @@
       <div id="contentIdeasSection" class="feature-section" style="display: none;">
         <div class="section-header">
           <button class="back-btn">← Kembali ke Menu</button>
-          <h2>Ide Konten 30 Hari</h2> 
+          <h2>Ide Konten 30 Hari</h2>
         </div>
         <p>Pilih jenis konten yang ingin kamu dapatkan inspirasinya.</p>
+
         <select id="ideasInput" onchange="toggleCustomPrompt()">
           <option value="Gaming">Gaming</option>
           <option value="Self-Improvement">Self-Improvement</option>
@@ -126,11 +132,13 @@
           <option value="Hacks & Trik">Hacks & Trik</option>
           <option value="custom">Isi Prompt Sendiri</option>
         </select>
+
         <!-- Textarea muncul hanya jika pilih 'Isi Prompt Sendiri' -->
         <textarea id="customIdeasInput" placeholder="Tulis prompt kamu di sini..." style="display:none; margin-top:10px;"></textarea>
+
         <button onclick="generateFeature('contentIdeas')" id="generateIdeasBtn">Hasilkan Ide</button>
       </div>
-    </div>
+
 
     <div id="limitInfo" style="text-align: center; margin-top: 10px; font-size: 0.9em;"></div>
 

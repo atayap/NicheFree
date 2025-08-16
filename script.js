@@ -89,14 +89,16 @@ window.generateFeature = async function (feature) {
   let userInput = "";
   let promptText = "";
 
+  // === Niche Finder ===
   if (feature === 'nicheFinder') {
-    userInput = document.getElementById('nicheInput').value.trim();
+    let nicheSelect = document.getElementById('nicheInput').value.trim();
 
     if (nicheSelect === "custom") {
       userInput = document.getElementById('customNicheInput').value.trim();
     } else {
       userInput = nicheSelect;
     }
+
     promptText = `
 Kamu adalah AI profesional yang membantu konten kreator YouTube Shorts.
 Berdasarkan topik berikut ini, berikan beberapa niche viral dan spesifik yang sedang tren di tahun 2025.
@@ -106,11 +108,13 @@ Pastikan niche tersebut cocok untuk video pendek (15–60 detik) dan memiliki po
 Topik dari user:
 ${userInput}`.trim();
 
+  // === Shorts Schedule ===
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
     promptText = `
 ${userInput}`.trim();
 
+  // === Content Ideas ===
   } else if (feature === 'contentIdeas') {
     let ideasSelect = document.getElementById('ideasInput').value.trim();
 
@@ -133,6 +137,7 @@ Setiap ide harus berisi:
 Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim();
   }
 
+  // === Limit check ===
   if (count >= 10) {
     document.getElementById('limitInfo').textContent = "⚠️ Anda sudah mencapai limit 10x hari ini.";
     return;
@@ -180,24 +185,24 @@ Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim()
   }
 };
 
-// fungsi global untuk toggle textarea custom
-window.toggleCustomPrompt = function() {
-  const ideasSelect = document.getElementById("ideasInput");
-  const customInput = document.getElementById("customIdeasInput");
+// === Toggle untuk custom prompt niche ===
+window.toggleCustomNiche = function() {
+  const nicheSelect = document.getElementById("nicheInput");
+  const customInput = document.getElementById("customNicheInput");
 
-  if (ideasSelect.value === "custom") {
+  if (nicheSelect.value === "custom") {
     customInput.style.display = "block";
   } else {
     customInput.style.display = "none";
   }
 };
 
-// fungsi global untuk toggle textarea custom2
+// === Toggle untuk custom prompt content ideas ===
 window.toggleCustomPrompt = function() {
-  const nicheSelect = document.getElementById("nicheInput");
-  const customInput = document.getElementById("customNicheInput");
+  const ideasSelect = document.getElementById("ideasInput");
+  const customInput = document.getElementById("customIdeasInput");
 
-  if (nicheSelect.value === "custom") {
+  if (ideasSelect.value === "custom") {
     customInput.style.display = "block";
   } else {
     customInput.style.display = "none";
