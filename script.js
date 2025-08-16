@@ -92,10 +92,10 @@ window.generateFeature = async function (feature) {
   if (feature === 'nicheFinder') {
     userInput = document.getElementById('nicheInput').value.trim();
 
-    if (ideasSelect2 === "custom2") {
-      userInput = document.getElementById('customnicheInput').value.trim();
+    if (nicheSelect === "custom") {
+      userInput = document.getElementById('customNicheInput').value.trim();
     } else {
-      userInput = ideasSelect2;
+      userInput = nicheSelect;
     }
     promptText = `
 Kamu adalah AI profesional yang membantu konten kreator YouTube Shorts.
@@ -194,13 +194,13 @@ window.toggleCustomPrompt = function() {
 
 // fungsi global untuk toggle textarea custom2
 window.toggleCustomPrompt = function() {
-  const ideasSelect2 = document.getElementById("nicheInput");
-  const customInput2 = document.getElementById("customnicheInput");
+  const nicheSelect = document.getElementById("nicheInput");
+  const customInput = document.getElementById("customNicheInput");
 
-  if (ideasSelect2.value === "custom2") {
-    customInput2.style.display = "block";
+  if (nicheSelect.value === "custom") {
+    customInput.style.display = "block";
   } else {
-    customInput2.style.display = "none";
+    customInput.style.display = "none";
   }
 };
 
