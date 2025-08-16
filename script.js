@@ -154,7 +154,7 @@ Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim()
       const cleanText = data?.choices?.[0]?.message?.content?.replace(/\*\*/g, '').trim();
       resultText.textContent = cleanText || "Gagal mendapatkan hasil.";
       count++;
-      document.getElementById('limitInfo').textContent = `Generate hari ini: ${count}/5`;
+      document.getElementById('limitInfo').textContent = `Generate hari ini: ${count}/10`;
     } else {
       resultText.textContent = data.message || "Gagal mendapatkan hasil dari AI.";
     }
