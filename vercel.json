@@ -8,7 +8,7 @@
     { "src": "api/generate.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/generate", "dest": "/api/generate.js" },
+    { "src": "/api/generate", "dest": "api/generate.js" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
