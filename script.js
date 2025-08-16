@@ -102,6 +102,8 @@ ${userInput}`.trim();
 
   } else if (feature === 'shortsSchedule') {
     userInput = document.getElementById('scheduleInput').value.trim();
+    promptText = `
+${userInput}`.trim();
 
   } else if (feature === 'contentIdeas') {
     userInput = document.getElementById('ideasInput').value.trim();
@@ -118,8 +120,8 @@ Setiap ide harus berisi:
 Fokus pada format yang cocok untuk video pendek berdurasi 15–60 detik.`.trim();
   }
 
-  if (count >= 5) {
-    document.getElementById('limitInfo').textContent = "⚠️ Anda sudah mencapai limit 5x hari ini.";
+  if (count >= 10) {
+    document.getElementById('limitInfo').textContent = "⚠️ Anda sudah mencapai limit 10x hari ini.";
     return;
   }
 
