@@ -92,7 +92,7 @@ window.generateFeature = async function (feature) {
   if (feature === 'nicheFinder') {
     userInput = document.getElementById('nicheInput').value.trim();
 
-    if (ideasSelect === "custom2") {
+    if (ideasSelect2 === "custom2") {
       userInput = document.getElementById('customnicheInput').value.trim();
     } else {
       userInput = ideasSelect2;
