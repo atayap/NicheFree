@@ -132,6 +132,29 @@ select {
   background-size: 18px;
 }
 
+/* Saweria Support Button */
+.saweria-support {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.saweria-support a {
+  display: inline-block;
+  background-color: #f59e0b; /* kuning orange khas Saweria */
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.saweria-support a:hover {
+  background-color: #d97706;
+  transform: translateY(-2px);
+}
+
 select:focus {
   outline: none;
   border-color: var(--primary);
